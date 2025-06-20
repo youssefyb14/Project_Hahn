@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { MdAdd, MdEdit, MdDelete } from 'react-icons/md';
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -38,7 +39,7 @@ function UserList() {
   return (
     <div className="table-container">
       <h2>Liste des utilisateurs</h2>
-      <button onClick={() => navigate('/add-user')}>Ajouter</button>
+      <button onClick={() => navigate('/add-user')}><MdAdd style={{verticalAlign:'middle'}} /> Ajouter</button>
       <table>
         <thead>
           <tr>
@@ -54,8 +55,8 @@ function UserList() {
                 <td>{user.id}</td><td>{user.lastName}</td><td>{user.firstName}</td>
                 <td>{user.username}</td><td>{user.email}</td>
                 <td>
-                  <button onClick={() => navigate(`/edit-user/${user.id}`)}>Modifier</button>
-                  <button onClick={() => handleDelete(user.id)}>Supprimer</button>
+                  <button onClick={() => navigate(`/edit-user/${user.id}`)}><MdEdit style={{verticalAlign:'middle'}} /> Modifier</button>
+                  <button onClick={() => handleDelete(user.id)}><MdDelete style={{verticalAlign:'middle'}} /> Supprimer</button>
                 </td>
               </tr>
             ))

@@ -254,3 +254,26 @@ button:hover {
     gap: 0.5rem;
   }
 }
+
+.success-popup {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #4ade80;
+  color: #065f46;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(16,185,129,0.15);
+  font-size: 1.1rem;
+  font-weight: 600;
+  z-index: 9999;
+  animation: fadeInOut 2.2s;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateX(-50%) scale(0.95); }
+  10% { opacity: 1; transform: translateX(-50%) scale(1); }
+  90% { opacity: 1; transform: translateX(-50%) scale(1); }
+  100% { opacity: 0; transform: translateX(-50%) scale(0.95); }
+}

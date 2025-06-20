@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // ✅ AJOUTER CETTE LIGNE
 import ProductEdit from './ProductEdit';
+import { MdAdd, MdEdit, MdDelete } from 'react-icons/md';
 
 function ProductList() {
   const [products, setProducts] = useState([]);
@@ -56,7 +57,7 @@ function ProductList() {
   return (
     <div className="table-container">
       <h2>Liste des produits</h2>
-      <button onClick={() => navigate('/add-product')}>Ajouter</button>
+      <button onClick={() => navigate('/add-product')}><MdAdd style={{verticalAlign:'middle'}} /> Ajouter</button>
       {loading && <p>Chargement...</p>}
       {error && <p style={{ color: 'red' }}>Erreur : {error}</p>}
 
@@ -80,8 +81,8 @@ function ProductList() {
                   <td>{product.name}</td>
                   <td>{product.price.toFixed(2)} €</td>
                   <td>
-                    <button onClick={() => setEditingProduct(product)}>Modifier</button>{' '}
-                    <button onClick={() => handleDelete(product.id)}>Supprimer</button>
+                    <button onClick={() => setEditingProduct(product)}><MdEdit style={{verticalAlign:'middle'}} /> Modifier</button>{' '}
+                    <button onClick={() => handleDelete(product.id)}><MdDelete style={{verticalAlign:'middle'}} /> Supprimer</button>
                   </td>
                 </tr>
               ))

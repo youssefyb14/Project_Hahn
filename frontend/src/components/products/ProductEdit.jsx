@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function ProductEdit({ product, onCancel, onSave }) {
   const [name, setName] = useState(product.name);
@@ -10,16 +11,31 @@ function ProductEdit({ product, onCancel, onSave }) {
 
     // Validation simple
     if (name.trim() === '' || isNaN(price) || price < 0) {
-      alert("Veuillez saisir un nom valide et un prix positif.");
+      Swal.fire({
+        icon: 'error',
+        title: 'Erreur',
+        text: 'Veuillez saisir un nom valide et un prix positif.'
+      });
       return;
     }
 
     axios.put(`http://localhost:8080/api/products/${product.id}`, { name, price })
       .then(() => {
-        onSave();  // Notifier la sauvegarde réussie
+        Swal.fire({
+          icon: 'success',
+          title: 'Succès',
+          text: 'Produit modifié avec succès',
+          confirmButtonText: 'OK'
+        }).then(() => {
+          onSave();
+        });
       })
       .catch(err => {
-        alert('Erreur lors de la mise à jour : ' + (err.response?.data?.message || err.message || ''));
+        Swal.fire({
+          icon: 'error',
+          title: 'Erreur',
+          text: 'Erreur lors de la mise à jour : ' + (err.response?.data?.message || err.message || '')
+        });
       });
   };
 
