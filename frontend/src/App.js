@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, NavLink, Navigate } from 'react-router-dom';
 import ProductList from './components/products/ProductList';
 import AddProduct from './components/products/AddProduct';
 import UserList from './components/users/UserList';
+import AddUser from './components/users/AddUser';
 
 function App() {
   return (
@@ -11,11 +12,8 @@ function App() {
         <div className="navbar-container">
           <div className="navbar-logo">Gestion App</div>
           <div className="navbar-links">
-            <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"} end>
+            <NavLink to="/products" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
               Produits
-            </NavLink>
-            <NavLink to="/add" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-              Ajouter
             </NavLink>
             <NavLink to="/users" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
               Utilisateurs
@@ -25,8 +23,8 @@ function App() {
       </nav>
 
       <Routes>
-        <Route path="/" element={<ProductList />} />
-        <Route path="/add" element={<AddProduct />} />
+        <Route path="/" element={<Navigate to="/products" />} />
+        <Route path="/products" element={<ProductList />} />
         <Route path="/users" element={<UserList />} />
       </Routes>
     </Router>

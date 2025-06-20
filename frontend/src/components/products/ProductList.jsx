@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // ✅ AJOUTER CETTE LIGNE
 import ProductEdit from './ProductEdit';
 
 function ProductList() {
@@ -7,6 +8,8 @@ function ProductList() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
+
+  const navigate = useNavigate(); // ✅ AJOUTER CETTE LIGNE
 
   const fetchProducts = () => {
     setLoading(true);
@@ -34,7 +37,6 @@ function ProductList() {
     }
   };
 
-  // Si on est en mode édition, afficher seulement le formulaire
   if (editingProduct) {
     return (
       <div>
@@ -51,10 +53,10 @@ function ProductList() {
     );
   }
 
-  // Sinon afficher la liste
   return (
     <div className="table-container">
       <h2>Liste des produits</h2>
+      <button onClick={() => navigate('/add-product')}>Ajouter</button>
       {loading && <p>Chargement...</p>}
       {error && <p style={{ color: 'red' }}>Erreur : {error}</p>}
 
