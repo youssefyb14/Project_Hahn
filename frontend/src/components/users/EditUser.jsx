@@ -22,19 +22,38 @@ function EditUser() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Validation frontend stricte
+    if (!user.firstName.trim() || !user.lastName.trim() || !user.username.trim() || !user.email.trim()) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation error',
+        text: 'All fields are required.'
+      });
+      return;
+    }
+    // Validation email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(user.email)) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation error',
+        text: 'Email is not valid.'
+      });
+      return;
+    }
     axios.put(`http://localhost:8080/api/users/${id}`, user)
       .then(() => {
         Swal.fire({
           icon: 'success',
-          title: 'Succès',
-          text: 'Utilisateur modifié avec succès',
+          title: 'Success',
+          text: 'User updated successfully',
           confirmButtonText: 'OK'
         }).then(() => navigate('/users'));
       })
       .catch(() => Swal.fire({
         icon: 'error',
-        title: 'Erreur',
-        text: 'Erreur de mise à jour'
+        title: 'Error',
+        text: 'Update failed'
       }));
   };
 
@@ -44,14 +63,14 @@ function EditUser() {
 
   return (
     <div>
-      <h2>Modifier l'utilisateur</h2>
+      <h2>Edit User</h2>
       <form onSubmit={handleSubmit}>
-        <input name="firstName" value={user.firstName} onChange={handleChange} required />
-        <input name="lastName" value={user.lastName} onChange={handleChange} required />
-        <input name="username" value={user.username} onChange={handleChange} required />
-        <input name="email" type="email" value={user.email} onChange={handleChange} required />
-        <button type="submit">Sauvegarder</button>
-        <button type="button" onClick={handleCancel} style={{ marginLeft: '10px' }}>Annuler</button>
+        <input name="firstName" value={user.firstName} onChange={handleChange} required placeholder="First name" />
+        <input name="lastName" value={user.lastName} onChange={handleChange} required placeholder="Last name" />
+        <input name="username" value={user.username} onChange={handleChange} required placeholder="Username" />
+        <input name="email" type="email" value={user.email} onChange={handleChange} required placeholder="Email" />
+        <button type="submit">Save</button>
+        <button type="button" onClick={handleCancel} style={{ marginLeft: '10px' }}>Cancel</button>
       </form>
     </div>
   );

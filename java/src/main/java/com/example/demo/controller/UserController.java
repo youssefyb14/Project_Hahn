@@ -5,6 +5,7 @@ import com.example.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity; // ✅ Import manquant
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 import java.util.Optional; // ✅ Import manquant
@@ -23,12 +24,12 @@ public class UserController {
     }
 
     @PostMapping
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody @Valid User user) {
         return userService.saveUser(user);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User userDetails) {
+    public User updateUser(@PathVariable Long id, @RequestBody @Valid User userDetails) {
         User user = userService.getUserById(id).orElseThrow(() -> new RuntimeException("User not found"));
         user.setUsername(userDetails.getUsername());
         user.setEmail(userDetails.getEmail());

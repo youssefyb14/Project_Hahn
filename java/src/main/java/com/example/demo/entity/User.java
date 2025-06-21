@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class User {
@@ -9,9 +10,21 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Username is required")
+    @Size(max = 255)
     private String username;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
+    @Size(max = 255)
     private String email;
+
+    @NotBlank(message = "First name is required")
+    @Size(max = 255)
     private String firstName;
+
+    @NotBlank(message = "Last name is required")
+    @Size(max = 255)
     private String lastName;
 
     // Getters & Setters

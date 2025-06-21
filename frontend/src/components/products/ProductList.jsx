@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'; // ✅ AJOUTER CETTE LIGNE
+import { useNavigate } from 'react-router-dom'; 
 import ProductEdit from './ProductEdit';
 import { MdAdd, MdEdit, MdDelete } from 'react-icons/md';
 
@@ -10,7 +10,7 @@ function ProductList() {
   const [error, setError] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
 
-  const navigate = useNavigate(); // ✅ AJOUTER CETTE LIGNE
+  const navigate = useNavigate(); 
 
   const fetchProducts = () => {
     setLoading(true);

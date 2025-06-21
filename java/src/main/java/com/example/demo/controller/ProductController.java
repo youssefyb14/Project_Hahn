@@ -4,6 +4,7 @@ import com.example.demo.entity.Product;
 import com.example.demo.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import jakarta.validation.Valid;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
+    public Product createProduct(@RequestBody @Valid Product product) {
         return productService.saveProduct(product);
     }
     @DeleteMapping("/{id}")
@@ -28,7 +29,7 @@ public class ProductController {
         productService.deleteProduct(id);
     }
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product updatedProduct) {
+    public Product updateProduct(@PathVariable Long id, @RequestBody @Valid Product updatedProduct) {
         return productService.getProductById(id)
             .map(product -> {
                 product.setName(updatedProduct.getName());

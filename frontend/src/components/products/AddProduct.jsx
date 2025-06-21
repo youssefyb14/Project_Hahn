@@ -11,7 +11,7 @@ function AddProduct({ onProductAdded }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Validation côté client
+   
     if (!name.trim() || !price.trim()) {
       Swal.fire({
         icon: 'error',

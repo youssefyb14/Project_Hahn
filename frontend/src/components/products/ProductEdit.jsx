@@ -9,12 +9,20 @@ function ProductEdit({ product, onCancel, onSave }) {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Validation simple
-    if (name.trim() === '' || isNaN(price) || price < 0) {
+    // Validation améliorée
+    if (name.trim() === '') {
       Swal.fire({
         icon: 'error',
-        title: 'Erreur',
-        text: 'Veuillez saisir un nom valide et un prix positif.'
+        title: 'Validation error',
+        text: 'Name is required.'
+      });
+      return;
+    }
+    if (isNaN(price) || price <= 0) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Validation error',
+        text: 'Price must be a positive number.'
       });
       return;
     }
@@ -42,31 +50,31 @@ function ProductEdit({ product, onCancel, onSave }) {
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="edit-name">Nom :</label>
+        <label htmlFor="edit-name">Name:</label>
         <input
           id="edit-name"
           type="text"
           value={name}
           onChange={e => setName(e.target.value)}
           required
-          placeholder="Nom du produit"
+          placeholder="Product name"
         />
       </div>
       <div>
-        <label htmlFor="edit-price">Prix :</label>
+        <label htmlFor="edit-price">Price:</label>
         <input
           id="edit-price"
           type="number"
           step="0.01"
-          min="0"
+          min="0.01"
           value={price}
           onChange={e => setPrice(parseFloat(e.target.value) || 0)}
           required
-          placeholder="Prix"
+          placeholder="Price"
         />
       </div>
-      <button type="submit">Sauvegarder</button>
-      <button type="button" onClick={onCancel}>Annuler</button>
+      <button type="submit">Save</button>
+      <button type="button" onClick={onCancel}>Cancel</button>
     </form>
   );
 }
