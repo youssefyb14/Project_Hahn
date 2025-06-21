@@ -7,7 +7,7 @@ const GitHubCallbackPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Extraire le code de l'URL
+   
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     const error = urlParams.get('error');
@@ -16,31 +16,22 @@ const GitHubCallbackPage = () => {
     console.log('GitHub Callback - Error:', error);
 
     if (error) {
-      console.error('GitHub OAuth Error:', error);
-      Swal.fire({
-        icon: 'error',
-        title: 'Erreur d\'authentification',
-        text: `Erreur GitHub: ${error}`,
-        confirmButtonText: 'OK'
-      }).then(() => {
-        navigate('/login');
-      });
+      // Ne rien faire, ne pas afficher de popup d'erreur
+      navigate('/login');
       return;
     }
 
     if (code) {
       console.log('Tentative d\'échange du code contre un token...');
-      
-      // Utiliser l'API backend pour échanger le code contre un token
       axios.post('http://localhost:8080/api/auth/github', { code })
         .then(response => {
           console.log('Réponse du backend:', response.data);
           const { user, token } = response.data;
-          
           if (!user || !token) {
-            throw new Error('Données utilisateur ou token manquantes');
+            // Ne rien faire, ne pas afficher de popup d'erreur
+            navigate('/login');
+            return;
           }
-          
           // Formater les données utilisateur de manière cohérente
           const formattedUser = {
             id: user.id,
@@ -50,46 +41,25 @@ const GitHubCallbackPage = () => {
             login: user.login,
             provider: 'github'
           };
-
-          console.log('Utilisateur formaté:', formattedUser);
-
           // Sauvegarder les données utilisateur
           localStorage.setItem('user', JSON.stringify(formattedUser));
           localStorage.setItem('github_token', token);
-
+          localStorage.setItem('login_time', Date.now().toString());
           // Afficher un message de succès
           Swal.fire({
             icon: 'success',
-            title: 'Connexion réussie',
-            text: `Bienvenue ${formattedUser.name} !`,
-            confirmButtonText: 'Continuer'
+            title: 'Login successful',
+            text: `Welcome ${formattedUser.name}!`,
+            confirmButtonText: 'Continue'
           }).then(() => {
             navigate('/products');
           });
         })
-        .catch(error => {
-          console.error('Erreur détaillée:', error);
-          console.error('Réponse d\'erreur:', error.response?.data);
-          
-          let errorMessage = 'Impossible de se connecter avec GitHub.';
-          if (error.response?.data?.error) {
-            errorMessage = error.response.data.error;
-          } else if (error.message) {
-            errorMessage = error.message;
-          }
-          
-          Swal.fire({
-            icon: 'error',
-            title: 'Erreur de connexion',
-            text: errorMessage,
-            confirmButtonText: 'OK'
-          }).then(() => {
-            navigate('/login');
-          });
+        .catch(() => {
+          // Ne rien faire, ne pas afficher de popup d'erreur
+          navigate('/login');
         });
     } else {
-      console.log('Aucun code trouvé, redirection vers login');
-      // Pas de code, rediriger vers la page de login
       navigate('/login');
     }
   }, [navigate]);

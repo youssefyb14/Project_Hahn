@@ -32,6 +32,7 @@ const GoogleLoginButton = () => {
 
           // Sauvegarde des données utilisateur
           localStorage.setItem('user', JSON.stringify(formattedUser));
+          localStorage.setItem('login_time', Date.now().toString());
 
           // Afficher un message de succès
           Swal.fire({

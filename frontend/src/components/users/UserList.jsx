@@ -33,30 +33,30 @@ function UserList() {
     }
   };
 
-  if (loading) return <p>Chargement...</p>;
-  if (error) return <p style={{ color: 'red' }}>Erreur : {error}</p>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p style={{ color: 'red' }}>Error: {error}</p>;
 
   return (
     <div className="table-container">
-      <h2>Liste des utilisateurs</h2>
-      <button onClick={() => navigate('/add-user')}><MdAdd style={{verticalAlign:'middle'}} /> Ajouter</button>
+      <h2>User List</h2>
+      <button onClick={() => navigate('/add-user')}><MdAdd style={{verticalAlign:'middle'}} /> Add</button>
       <table>
         <thead>
           <tr>
-            <th>ID</th><th>Nom</th><th>Prénom</th><th>Username</th><th>Email</th><th>Actions</th>
+            <th>ID</th><th>Last Name</th><th>First Name</th><th>Username</th><th>Email</th><th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {users.length === 0 ? (
-            <tr><td colSpan="6">Aucun utilisateur trouvé</td></tr>
+            <tr><td colSpan="6">No users found</td></tr>
           ) : (
             users.map(user => (
               <tr key={user.id}>
                 <td>{user.id}</td><td>{user.lastName}</td><td>{user.firstName}</td>
                 <td>{user.username}</td><td>{user.email}</td>
                 <td>
-                  <button onClick={() => navigate(`/edit-user/${user.id}`)}><MdEdit style={{verticalAlign:'middle'}} /> Modifier</button>
-                  <button onClick={() => handleDelete(user.id)}><MdDelete style={{verticalAlign:'middle'}} /> Supprimer</button>
+                  <button onClick={() => navigate(`/edit-user/${user.id}`)}><MdEdit style={{verticalAlign:'middle'}} /> Edit</button>
+                  <button onClick={() => handleDelete(user.id)}><MdDelete style={{verticalAlign:'middle'}} /> Delete</button>
                 </td>
               </tr>
             ))

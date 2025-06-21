@@ -56,24 +56,24 @@ function ProductList() {
 
   return (
     <div className="table-container">
-      <h2>Liste des produits</h2>
-      <button onClick={() => navigate('/add-product')}><MdAdd style={{verticalAlign:'middle'}} /> Ajouter</button>
-      {loading && <p>Chargement...</p>}
-      {error && <p style={{ color: 'red' }}>Erreur : {error}</p>}
+      <h2>Product List</h2>
+      <button onClick={() => navigate('/add-product')}><MdAdd style={{verticalAlign:'middle'}} /> Add</button>
+      {loading && <p>Loading...</p>}
+      {error && <p style={{ color: 'red' }}>Error: {error}</p>}
 
       {!loading && !error && (
         <table>
           <thead>
             <tr>
               <th>ID</th>
-              <th>Nom</th>
-              <th>Prix</th>
+              <th>Name</th>
+              <th>Price</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
             {products.length === 0 ? (
-              <tr><td colSpan="4">Aucun produit trouvé</td></tr>
+              <tr><td colSpan="4">No products found</td></tr>
             ) : (
               products.map(product => (
                 <tr key={product.id}>
@@ -81,8 +81,8 @@ function ProductList() {
                   <td>{product.name}</td>
                   <td>{product.price.toFixed(2)} €</td>
                   <td>
-                    <button onClick={() => setEditingProduct(product)}><MdEdit style={{verticalAlign:'middle'}} /> Modifier</button>{' '}
-                    <button onClick={() => handleDelete(product.id)}><MdDelete style={{verticalAlign:'middle'}} /> Supprimer</button>
+                    <button onClick={() => setEditingProduct(product)}><MdEdit style={{verticalAlign:'middle'}} /> Edit</button>{' '}
+                    <button onClick={() => handleDelete(product.id)}><MdDelete style={{verticalAlign:'middle'}} /> Delete</button>
                   </td>
                 </tr>
               ))
