@@ -15,11 +15,9 @@ const GoogleLoginButton = () => {
         onSuccess={credentialResponse => {
           const token = credentialResponse.credential;
 
-          // Décoder le token
+          
           const userInfo = jwtDecode(token);
           console.log('Utilisateur connecté :', userInfo);
-
-          // Formater les données utilisateur de manière cohérente
           const formattedUser = {
             id: userInfo.sub,
             name: userInfo.name,
@@ -30,11 +28,11 @@ const GoogleLoginButton = () => {
             provider: 'google'
           };
 
-          // Sauvegarde des données utilisateur
+          
           localStorage.setItem('user', JSON.stringify(formattedUser));
           localStorage.setItem('login_time', Date.now().toString());
 
-          // Afficher un message de succès
+      
           Swal.fire({
             icon: 'success',
             title: 'Connexion réussie',

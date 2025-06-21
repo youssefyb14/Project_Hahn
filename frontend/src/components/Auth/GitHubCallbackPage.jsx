@@ -16,7 +16,6 @@ const GitHubCallbackPage = () => {
     console.log('GitHub Callback - Error:', error);
 
     if (error) {
-      // Ne rien faire, ne pas afficher de popup d'erreur
       navigate('/login');
       return;
     }
@@ -28,11 +27,10 @@ const GitHubCallbackPage = () => {
           console.log('Réponse du backend:', response.data);
           const { user, token } = response.data;
           if (!user || !token) {
-            // Ne rien faire, ne pas afficher de popup d'erreur
+            
             navigate('/login');
             return;
           }
-          // Formater les données utilisateur de manière cohérente
           const formattedUser = {
             id: user.id,
             name: user.name || user.login,
@@ -41,11 +39,10 @@ const GitHubCallbackPage = () => {
             login: user.login,
             provider: 'github'
           };
-          // Sauvegarder les données utilisateur
+          
           localStorage.setItem('user', JSON.stringify(formattedUser));
           localStorage.setItem('github_token', token);
           localStorage.setItem('login_time', Date.now().toString());
-          // Afficher un message de succès
           Swal.fire({
             icon: 'success',
             title: 'Login successful',
@@ -56,7 +53,6 @@ const GitHubCallbackPage = () => {
           });
         })
         .catch(() => {
-          // Ne rien faire, ne pas afficher de popup d'erreur
           navigate('/login');
         });
     } else {

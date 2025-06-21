@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { MdAdd, MdEdit, MdDelete } from 'react-icons/md';
+import api from '../../services/api';
+
 
 function UserList() {
   const [users, setUsers] = useState([]);
@@ -10,7 +11,7 @@ function UserList() {
   const navigate = useNavigate();
 
   const fetchUsers = () => {
-    axios.get('http://localhost:8080/api/users')
+    api.get('/users')
       .then(response => {
         setUsers(response.data);
         setLoading(false);
@@ -27,9 +28,9 @@ function UserList() {
 
   const handleDelete = (id) => {
     if (window.confirm("Confirmer la suppression ?")) {
-      axios.delete(`http://localhost:8080/api/users/${id}`)
+      api.delete(`/users/${id}`)
         .then(() => fetchUsers())
-        .catch(err => alert("Erreur de suppression"));
+        .catch(() => alert("Erreur de suppression"));
     }
   };
 
@@ -39,11 +40,14 @@ function UserList() {
   return (
     <div className="table-container">
       <h2>User List</h2>
-      <button onClick={() => navigate('/add-user')}><MdAdd style={{verticalAlign:'middle'}} /> Add</button>
+      <button onClick={() => navigate('/add-user')}>
+        <MdAdd style={{ verticalAlign: 'middle' }} /> Add
+      </button>
       <table>
         <thead>
           <tr>
-            <th>ID</th><th>Last Name</th><th>First Name</th><th>Username</th><th>Email</th><th>Actions</th>
+            <th>ID</th><th>Last Name</th><th>First Name</th>
+            <th>Username</th><th>Email</th><th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -55,8 +59,12 @@ function UserList() {
                 <td>{user.id}</td><td>{user.lastName}</td><td>{user.firstName}</td>
                 <td>{user.username}</td><td>{user.email}</td>
                 <td>
-                  <button onClick={() => navigate(`/edit-user/${user.id}`)}><MdEdit style={{verticalAlign:'middle'}} /> Edit</button>
-                  <button onClick={() => handleDelete(user.id)}><MdDelete style={{verticalAlign:'middle'}} /> Delete</button>
+                  <button onClick={() => navigate(`/edit-user/${user.id}`)}>
+                    <MdEdit style={{ verticalAlign: 'middle' }} /> Edit
+                  </button>
+                  <button onClick={() => handleDelete(user.id)}>
+                    <MdDelete style={{ verticalAlign: 'middle' }} /> Delete
+                  </button>
                 </td>
               </tr>
             ))
