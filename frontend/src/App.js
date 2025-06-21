@@ -6,14 +6,15 @@ import UserList from './components/users/UserList';
 import AddUser from './components/users/AddUser';
 import EditUser from './components/users/EditUser';
 import LoginPage from './components/Auth/LoginPage';
+import GitHubCallbackPage from './components/Auth/GitHubCallbackPage';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/Auth/PrivateRoute';
 
 function AppContent() {
   const location = useLocation();
 
-  // Ne pas afficher Navbar sur la page /login
-  const hideNavbar = location.pathname === '/login';
+  // Ne pas afficher Navbar sur la page /login et /github/callback
+  const hideNavbar = location.pathname === '/login' || location.pathname === '/github/callback';
 
   return (
     <>
@@ -21,6 +22,7 @@ function AppContent() {
       <Routes>
         <Route path="/" element={<Navigate to="/products" />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/github/callback" element={<GitHubCallbackPage />} />
 
         <Route 
           path="/products" 
