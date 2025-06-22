@@ -1,18 +1,18 @@
-# Application Spring Boot avec Docker
+# Spring Boot Application with Docker
 
-## Prérequis
-- Docker installé
+## Prerequisites
+- Docker installed
 
-## Construction de l'image Docker
+## Building the Docker Image
 
 ```bash
 docker build -t springboot-app .
-```
 
+```
 ## Lancement du conteneur
 
 ```bash
 docker run -p 8080:8080 springboot-app
 ```
 
-L'application sera accessible sur http://localhost:8080 
+The application will be accessible at http://localhost:8080 

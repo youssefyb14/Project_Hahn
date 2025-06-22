@@ -19,7 +19,7 @@ const GitHubLoginButton = () => {
   return (
     <button className="github-login-button" onClick={handleGitHubLogin}>
       <FaGithub size={20} />
-      Connexion avec GitHub
+      Login with GitHub
     </button>
   );
 };

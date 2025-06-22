@@ -31,8 +31,8 @@ function ProductEdit({ product, onCancel, onSave }) {
       .then(() => {
         Swal.fire({
           icon: 'success',
-          title: 'Succès',
-          text: 'Produit modifié avec succès',
+          title: 'Success',
+          text: 'Product updated successfully',
           confirmButtonText: 'OK'
         }).then(() => {
           onSave();
@@ -41,8 +41,8 @@ function ProductEdit({ product, onCancel, onSave }) {
       .catch(err => {
         Swal.fire({
           icon: 'error',
-          title: 'Erreur',
-          text: 'Erreur lors de la mise à jour : ' + (err.response?.data?.message || err.message || '')
+          title: 'Error',
+          text: 'Error updating product: ' + (err.response?.data?.message || err.message || '')
         });
       });
   };

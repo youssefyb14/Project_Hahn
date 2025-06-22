@@ -17,13 +17,13 @@ function AddUser() {
 
   const validate = () => {
     const newErrors = {};
-    if (!user.firstName.trim()) newErrors.firstName = 'Le prénom est requis';
-    if (!user.lastName.trim()) newErrors.lastName = 'Le nom est requis';
-    if (!user.username.trim()) newErrors.username = "Le nom d'utilisateur est requis";
+    if (!user.firstName.trim()) newErrors.firstName = 'First name is required';
+    if (!user.lastName.trim()) newErrors.lastName = 'Last name is required';
+    if (!user.username.trim()) newErrors.username = 'Username is required';
     if (!user.email.trim()) {
-      newErrors.email = "L'email est requis";
+      newErrors.email = 'Email is required';
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
-      newErrors.email = "Format de l'email invalide";
+      newErrors.email = 'Invalid email format';
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -42,27 +42,27 @@ function AddUser() {
   .then(() => {
     Swal.fire({
       icon: 'success',
-      title: 'Succès',
-      text: 'Utilisateur ajouté avec succès',
+      title: 'Success',
+      text: 'User added successfully',
       confirmButtonText: 'OK'
     }).then(() => navigate('/users'));
   })
   .catch(() => Swal.fire({
     icon: 'error',
-    title: 'Erreur',
-    text: "Erreur lors de l'ajout"
+    title: 'Error',
+    text: 'Error adding user'
   }));
 };
   return (
     <div>
-      <h2>Ajouter un utilisateur</h2>
+      <h2>Add User</h2>
       <form onSubmit={handleSubmit} noValidate>
         <div>
           <input
             name="firstName"
             value={user.firstName}
             onChange={handleChange}
-            placeholder="Prénom"
+            placeholder="First name"
           />
           {errors.firstName && <span style={{ color: 'red' }}>{errors.firstName}</span>}
         </div>
@@ -72,7 +72,7 @@ function AddUser() {
             name="lastName"
             value={user.lastName}
             onChange={handleChange}
-            placeholder="Nom"
+            placeholder="Last name"
           />
           {errors.lastName && <span style={{ color: 'red' }}>{errors.lastName}</span>}
         </div>
@@ -82,7 +82,7 @@ function AddUser() {
             name="username"
             value={user.username}
             onChange={handleChange}
-            placeholder="Nom d'utilisateur"
+            placeholder="Username"
           />
           {errors.username && <span style={{ color: 'red' }}>{errors.username}</span>}
         </div>
@@ -98,7 +98,7 @@ function AddUser() {
           {errors.email && <span style={{ color: 'red' }}>{errors.email}</span>}
         </div>
 
-        <button type="submit">Ajouter</button>
+        <button type="submit">Add</button>
       </form>
     </div>
   );

@@ -15,8 +15,8 @@ function AddProduct({ onProductAdded }) {
     if (!name.trim() || !price.trim()) {
       Swal.fire({
         icon: 'error',
-        title: 'Champs requis',
-        text: 'Tous les champs sont obligatoires.'
+        title: 'Required fields',
+        text: 'All fields are required.'
       });
       return;
     }
@@ -24,8 +24,8 @@ function AddProduct({ onProductAdded }) {
     if (isNaN(priceValue) || priceValue <= 0) {
       Swal.fire({
         icon: 'error',
-        title: 'Prix invalide',
-        text: 'Le prix doit être un nombre positif.'
+        title: 'Invalid price',
+        text: 'Price must be a positive number.'
       });
       return;
     }
@@ -38,8 +38,8 @@ function AddProduct({ onProductAdded }) {
       setPrice('');
       Swal.fire({
         icon: 'success',
-        title: 'Succès',
-        text: 'Produit ajouté avec succès',
+        title: 'Success',
+        text: 'Product added successfully',
         confirmButtonText: 'OK'
       }).then(() => {
         navigate('/products');
@@ -47,8 +47,8 @@ function AddProduct({ onProductAdded }) {
     } catch (error) {
       Swal.fire({
         icon: 'error',
-        title: 'Erreur',
-        text: "Erreur lors de l'ajout du produit"
+        title: 'Error',
+        text: 'Error adding product'
       });
     }
   };
@@ -56,9 +56,9 @@ function AddProduct({ onProductAdded }) {
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <h2>Ajouter un produit</h2>
+        <h2>Add Product</h2>
         <div>
-          <label htmlFor="name">Nom :</label>
+          <label htmlFor="name">Name:</label>
           <input
             id="name"
             type="text"
@@ -68,7 +68,7 @@ function AddProduct({ onProductAdded }) {
           />
         </div>
         <div>
-          <label htmlFor="price">Prix :</label>
+          <label htmlFor="price">Price:</label>
           <input
             id="price"
             type="number"
@@ -78,7 +78,7 @@ function AddProduct({ onProductAdded }) {
             required
           />
         </div>
-        <button type="submit"><MdAdd style={{verticalAlign:'middle'}} /> Ajouter</button>
+        <button type="submit"><MdAdd style={{verticalAlign:'middle'}} /> Add</button>
       </form>
     </>
   );

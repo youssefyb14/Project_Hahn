@@ -13,8 +13,8 @@ function EditUser() {
       .then(response => setUser(response.data))
       .catch(() => Swal.fire({
         icon: 'error',
-        title: 'Erreur',
-        text: 'Utilisateur introuvable'
+        title: 'Error',
+        text: 'User not found'
       }));
   }, [id]);
 

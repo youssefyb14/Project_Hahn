@@ -10,24 +10,25 @@ const Navbar = () => {
 
   const handleLogout = () => {
     Swal.fire({
-      title: 'Déconnexion',
-      text: 'Êtes-vous sûr de vouloir vous déconnecter ?',
+      title: 'Logout',
+      text: 'Are you sure you want to logout?',
       icon: 'question',
       showCancelButton: true,
       confirmButtonColor: '#ef4444',
       cancelButtonColor: '#6b7280',
-      confirmButtonText: 'Oui, se déconnecter',
-      cancelButtonText: 'Annuler'
+      confirmButtonText: 'Yes, logout',
+      cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {
         // Supprimer les tokens et données utilisateur
         localStorage.removeItem('user');
         localStorage.removeItem('github_token');
+        localStorage.removeItem('login_time');
         
         Swal.fire({
           icon: 'success',
-          title: 'Déconnexion réussie',
-          text: 'Vous avez été déconnecté avec succès.',
+          title: 'Logout successful',
+          text: 'You have been logged out successfully.',
           confirmButtonText: 'OK'
         }).then(() => {
           navigate('/login');
@@ -55,18 +56,18 @@ const Navbar = () => {
   return (
     <nav className="main-navbar">
       <div className="navbar-container">
-        <div className="navbar-logo">Gestion App</div>
+        <div className="navbar-logo">Management App</div>
         <div className="navbar-links">
           <NavLink to="/products" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            Produits
+            Products
           </NavLink>
           <NavLink to="/users" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-            Utilisateurs
+            Users
           </NavLink>
 
           {!user ? (
             <NavLink to="/login" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
-              Connexion
+              Login
             </NavLink>
           ) : (
             <>
@@ -83,13 +84,13 @@ const Navbar = () => {
                   )}
                 </div>
                 <span className="user-name">
-                  {user.name || user.given_name || 'Utilisateur'}
+                  {user.name || user.given_name || 'User'}
                   {getProviderIcon(user.provider)}
                 </span>
               </div>
               <button onClick={handleLogout} className="logout-button">
                 <MdLogout size={16} style={{ marginRight: '4px', verticalAlign: 'middle' }} />
-                Déconnexion
+                Logout
               </button>
             </>
           )}

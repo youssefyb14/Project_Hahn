@@ -21,10 +21,10 @@ const GitHubCallbackPage = () => {
     }
 
     if (code) {
-      console.log('Tentative d\'échange du code contre un token...');
+      console.log('Attempting to exchange code for token...');
       axios.post('http://localhost:8080/api/auth/github', { code })
         .then(response => {
-          console.log('Réponse du backend:', response.data);
+          console.log('Backend response:', response.data);
           const { user, token } = response.data;
           if (!user || !token) {
             
@@ -63,8 +63,8 @@ const GitHubCallbackPage = () => {
   return (
     <div className="login-container">
       <div className="login-card">
-        <h1 className="login-title">Connexion en cours...</h1>
-        <p className="login-subtitle">Authentification avec GitHub</p>
+        <h1 className="login-title">Connecting...</h1>
+        <p className="login-subtitle">Authenticating with GitHub</p>
         <div style={{ marginTop: '2rem', textAlign: 'center' }}>
           <div style={{ width: '40px', height: '40px', border: '4px solid #f3f3f3', borderTop: '4px solid #3498db', borderRadius: '50%', animation: 'spin 1s linear infinite', margin: '0 auto' }}></div>
         </div>
