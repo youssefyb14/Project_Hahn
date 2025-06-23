@@ -23,6 +23,7 @@ To access the database, go to the phpMyAdmin interface, which is running on port
 Log in using root as both the username and password.
 I have already configured a default database named hahn, and a schema.sql file is used to define the database schema.
 For the frontend application running on port 3000, you need to wait a little for it to start.
+If you have a problem starting the Docker container for your Spring Boot application running on port 8080 this  and encounter an error related to database connectivity, you can simply restart it yourself and it will work.
 
 For the application, I implemented REST endpoints for the product and user tables.
 On the frontend side, I used this REST API and added popups for actions like GET, POST, and PUT.
